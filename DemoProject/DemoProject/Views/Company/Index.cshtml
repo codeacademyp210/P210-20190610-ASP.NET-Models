@@ -1,0 +1,36 @@
+﻿@model List<DemoProject.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Companies</h1>
+
+<a href="@Url.Action("Create")" class="btn btn-success">Create Company</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var company in Model)
+                {
+
+                <tr>
+                    <td>@company.Name</td>
+                    <td>@company.Address</td>
+                    <td>@company.Phone</td>
+                </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
