@@ -26,5 +26,6 @@ namespace DemoProject.Models
         }
     
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }

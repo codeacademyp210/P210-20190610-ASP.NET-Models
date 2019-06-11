@@ -1,5 +1,6 @@
 ﻿using DemoProject.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -11,30 +12,6 @@ namespace DemoProject.Controllers
         // GET: Company
         public ActionResult Index()
         {
-            //List<Company> companies = new List<Company> {
-            //    new Company {
-            //        Id = 1,
-            //        Name = "Simbrella",
-            //        Address = "City Point",
-            //        Phone = "0125552200"
-            //    },
-            //    new Company {
-            //        Id = 2,
-            //        Name = "Code Academy",
-            //        Address = "Nizami",
-            //        Phone = "0125552525"
-            //    },
-            //    new Company {
-            //        Id = 3,
-            //        Name = "Ipeksu",
-            //        Address = "Yasamal",
-            //        Phone = "01222211144"
-            //    }
-
-            //};
-
-            //ViewBag.companyName = company.Name;
-            //ViewData["companyAddress"] = company.Address;
 
             List<Company> companies;
             using (P210_MVCEntities db = new P210_MVCEntities())
@@ -49,7 +26,9 @@ namespace DemoProject.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            ViewBag.FormTitle = "Create Company";
+            ViewBag.FormButton = "Save";
+            return View("CompanyForm");
         }
 
 
@@ -59,11 +38,58 @@ namespace DemoProject.Controllers
             using (P210_MVCEntities db = new P210_MVCEntities())
             {
                 db.Companies.Add(company);
-                //db.Entry(company).Property("Id").IsModified = false;
-
                 db.SaveChanges();
             }
 
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            using (P210_MVCEntities db = new P210_MVCEntities())
+            {
+                Company company = db.Companies.FirstOrDefault(c => c.Id == id);
+                if (company != null)
+                {
+                    db.Companies.Remove(company);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Company company;
+            using (P210_MVCEntities db = new P210_MVCEntities())
+            {
+                company = db.Companies.FirstOrDefault(c => c.Id == id);
+            }
+
+            ViewBag.FormTitle = "Update Company";
+            ViewBag.FormButton = "Update";
+
+            return View("CompanyForm", company);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(Company company)
+        {
+            using (P210_MVCEntities db = new P210_MVCEntities())
+            {
+                db.Entry(company).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            //db.Entry(company).Property("Id").IsModified = false;
             return RedirectToAction("Index");
         }
 

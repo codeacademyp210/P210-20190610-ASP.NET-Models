@@ -1,0 +1,44 @@
+﻿@model DemoProject.ViewModels.EmployeeFormViewModel
+
+@{
+    ViewBag.Title = "Employee Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EmployeeForm</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Employee", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Employee.Name)
+                @Html.TextBoxFor(m => m.Employee.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Employee.Surname)
+                @Html.TextBoxFor(m => m.Employee.Surname, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Employee.Phone)
+                @Html.TextBoxFor(m => m.Employee.Phone, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Employee.Email)
+                @Html.TextBoxFor(m => m.Employee.Email, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Company Name")
+                @Html.DropDownListFor(
+                                m => m.Employee.CompanyID,
+                                new SelectList(Model.Companies, "id", "name"),
+                                null,
+                                new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-success">Save</button>
+        }
+    </div>
+</div>

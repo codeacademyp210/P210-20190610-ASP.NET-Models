@@ -1,10 +1,11 @@
 ﻿@model DemoProject.Models.Company
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Company</h2>
+<h2 class="mt-4">@ViewBag.FormTitle</h2>
 
 <div class="row">
     <div class="col-md-6">
@@ -23,7 +24,7 @@
                 @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
             </div>
 
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success">@ViewBag.FormButton</button>
         }
     </div>
 </div>

@@ -1,0 +1,57 @@
+﻿@model List<DemoProject.Models.Employee>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Employees</h1>
+
+<a href="@Url.Action("Create")" class="btn btn-success mb-4">Create Employee</a>
+
+@if (Model.Count > 0)
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>Photo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+
+                        <tr>
+                            <td>@employee.Name</td>
+                            <td>@employee.Surname</td>
+                            <td>@employee.Phone</td>
+                            <td>@employee.Email</td>
+                            <td>@employee.Company.Name</td>
+                            <td>@employee.Photo</td>
+                            <td class=" d-flex justify-content-around">
+                                <a href="@Url.Action("Edit", new { id = employee.Id })" class="text-info"><i class="fas fa-edit"></i></a>
+                                <a onclick="return confirm('Are you sure delete this employee')" href="@Url.Action("Delete", new { id = employee.Id })" class="text-warning"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+} else
+{
+    <p class="alert alert-warning">There is no employee</p>
+}
+
+
+
+

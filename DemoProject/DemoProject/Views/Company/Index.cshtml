@@ -6,7 +6,7 @@
 }
 <h1>Companies</h1>
 
-<a href="@Url.Action("Create")" class="btn btn-success">Create Company</a>
+<a href="@Url.Action("Create")" class="btn btn-success mb-4">Create Company</a>
 
 <div class="row">
     <div class="col-md-12">
@@ -16,6 +16,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,10 @@
                     <td>@company.Name</td>
                     <td>@company.Address</td>
                     <td>@company.Phone</td>
+                    <td class=" d-flex justify-content-around">
+                        <a href="@Url.Action("Edit", new { id = company.Id })" class="text-info"><i class="fas fa-edit"></i></a>
+                        <a onclick="return confirm('Are you sure delete this company')" href="@Url.Action("Delete", new { id = company.Id })" class="text-warning"><i class="fas fa-trash"></i></a>
+                    </td>
                 </tr>
                 }
                 
