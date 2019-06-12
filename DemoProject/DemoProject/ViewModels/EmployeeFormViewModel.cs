@@ -10,5 +10,9 @@ namespace DemoProject.ViewModels
     {
         public Employee Employee{ get; set; }
         public List<Company> Companies { get; set; }
+
+        public string FormTitle { get; set; }
+        public string SubmitButton { get; set; }
+        public string Action { get; set; }
     }
 }

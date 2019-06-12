@@ -35,7 +35,13 @@
                             <td>@employee.Phone</td>
                             <td>@employee.Email</td>
                             <td>@employee.Company.Name</td>
-                            <td>@employee.Photo</td>
+                            <td>
+                                @if (employee.Photo != null)
+                                {
+                                    <img src="~/Uploads/@employee.Photo" alt="@employee.Name + @employee.Surname" width="50" />
+                                }
+
+                            </td>
                             <td class=" d-flex justify-content-around">
                                 <a href="@Url.Action("Edit", new { id = employee.Id })" class="text-info"><i class="fas fa-edit"></i></a>
                                 <a onclick="return confirm('Are you sure delete this employee')" href="@Url.Action("Delete", new { id = employee.Id })" class="text-warning"><i class="fas fa-trash"></i></a>
@@ -47,7 +53,8 @@
             </table>
         </div>
     </div>
-} else
+}
+else
 {
     <p class="alert alert-warning">There is no employee</p>
 }
